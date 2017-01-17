@@ -26,3 +26,6 @@ monitor_server: 52.69.16.156
 
 prod_data_file_location: /home/ubuntu/dumpForProdSim.sql
 prod_data_without_MV_file_location: /home/ubuntu/dumpWithoutMVForProdSim.sql
+
+nfs_client_hosts: ######
+nfs_server_hosts: ######

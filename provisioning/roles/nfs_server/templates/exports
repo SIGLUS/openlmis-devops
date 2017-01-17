@@ -1,0 +1,1 @@
+/app/tomcat/openlmis/emailattachment {{ nfs_client_hosts }}(rw,sync,no_subtree_check)
