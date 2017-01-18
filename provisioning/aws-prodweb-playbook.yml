@@ -1,12 +1,27 @@
 ---
-- hosts: prodweb
+- hosts: prodweb-master
   connection: ssh
   sudo: yes
   roles:
     - base
+    - oracle-java
     - tomcat
     - flyway
     - cubes
     - phantom
+    - nfs_server
   vars:
-    region: prod
+    region: prodweb-master
+
+- hosts: prodweb-slave
+  connection: ssh
+  sudo: yes
+  roles:
+    - base
+    - oracle-java
+    - tomcat
+    - cubes
+    - phantom
+    - nfs_client
+  vars:
+    region: prodweb-slave
