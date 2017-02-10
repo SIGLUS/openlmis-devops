@@ -33,4 +33,4 @@ CREATE MATERIALIZED VIEW vw_period_movements AS
      JOIN geographic_zones AS parent_zone
        ON ZONE.parentid = parent_zone.id);
 
-CREATE UNIQUE INDEX idx_vw_period_movements ON vw_period_movements (uuid);
+CREATE UNIQUE INDEX idx_vw_period_movements ON vw_period_movements (uuid,periodStart,periodEnd,facility_code);
