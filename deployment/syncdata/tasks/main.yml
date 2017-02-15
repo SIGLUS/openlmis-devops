@@ -23,5 +23,8 @@
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file change_passwords.sql"
 
+- name: Add a temp empty view to not fail prodsim deploy
+  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/temp_vw_period_movement.sql"
+
 - name: Start app
   command: "sudo service tomcat start"
