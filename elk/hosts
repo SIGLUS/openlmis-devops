@@ -1,0 +1,17 @@
+[servers:children]
+elasticsearch_servers
+kibana_servers
+filebeat_servers
+metricbeat
+
+[elasticsearch_servers]
+*.*.*.* elastic_hosts=*.*.*.*
+
+[kibana_servers]
+*.*.*.*
+
+[filebeat_servers]
+*.*.*.*
+
+[metricbeat]
+*.*.*.*
