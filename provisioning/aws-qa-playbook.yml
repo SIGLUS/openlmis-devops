@@ -4,6 +4,7 @@
   sudo: yes
   roles:
     - base
+    - oracle-java
     - tomcat
     - postgres
     - postgres-init
@@ -20,6 +21,7 @@
   sudo: yes
   roles:
     - base
+    - oracle-java
     - tomcat
     - cubes
     - phantom

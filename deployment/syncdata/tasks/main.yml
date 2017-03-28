@@ -20,13 +20,11 @@
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/dumpWithoutMVForProdSim.sql"
   sudo_user: postgres
 
-#temporary for prodsim before we deploy V698 migration to prod
-- name: Insert migration version
-  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/insert_migration_V698.sql"
-  sudo_user: postgres
-
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file change_passwords.sql"
+
+- name: Add a temp empty view to not fail prodsim deploy
+  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/temp_vw_period_movement.sql"
 
 - name: Start app
   command: "sudo service tomcat start"

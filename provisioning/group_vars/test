@@ -1,4 +1,0 @@
----
-dbhost_master: localhost
-dbhost_slave: localhost
-dbport: 5432

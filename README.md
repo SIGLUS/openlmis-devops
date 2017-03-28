@@ -13,9 +13,6 @@ This provision project is build for https://github.com/OpenLMIS/open-lmis/tree/2
 
 Instead of installing these requirements one by one. Ansible can help us do the annoying jobs for us. Here are some instructions.
 
-## Using Ansible with vagrant
-We want to keep the develop environment all the same. Vagrant provisioned with Ansible is a good choice.
-
 ### Requirements for your local machine
 
 #### Install latest Ansible
@@ -35,14 +32,6 @@ Want to install in Ubuntu etc.? Read [Official instruction](http://docs.ansible.
 Ansible will use ssh to login your virtual machine. SSHPASS should be installed in advance.
 
 Read [SSHPASS install instruction] (https://gist.github.com/arunoda/7790979)
-
-### Run your virtual machine
-
-Navigating to the OpenLMS-TechOps root directory, run `vagrant up`. Ansible will install all packages you declared in `provisioning/vagrant-playbook.yml` file.
-
-If your machine is already running, you want to provision again, just need to run `vagrant provision`. More vagrant commands read [here](http://docs.vagrantup.com/v2/cli/).
-
-To ssh into your box, run `vagrant ssh`.
 
 ## Provision CI server
 run `ansible-playbook --extra-vars '{"DBPASSWORD":"[specify_a_db_password]", "MAILPASSWORD":"[specify_your_mail_server_password]"}' -i provisioning/hosts provisioning/aws-ci-playbook.yml`

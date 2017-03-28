@@ -9,7 +9,7 @@
 
     - name: Update exports file
       sudo: yes
-      copy: src=exports dest=/etc/exports
+      template: src=exports dest=/etc/exports
 
     - name: Re-read exports file
       sudo: yes

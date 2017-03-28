@@ -27,3 +27,5 @@
      - postgresql.conf.slave
      - recovery.conf.slave
 
+- name: Start postgresql
+  shell: /etc/init.d/postgresql start
