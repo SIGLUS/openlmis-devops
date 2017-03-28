@@ -1,0 +1,16 @@
+---
+- name: Step 1 > Download filebeat
+  get_url: url=https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.2.1-amd64.deb
+           dest=/opt/filebeat-5.2.1-amd64.deb
+
+- name: Step 2 > Install filebeat
+  shell: dpkg -i filebeat-5.2.1-amd64.deb
+
+- name: Step 3 > Configure filebeat
+  template: src=filebeat.yml dest=/etc/filebeat/filebeat.yml mode=0755
+
+- name: Step 4 > Start filebeat
+  shell: /etc/init.d/filebeat start
+
+
+

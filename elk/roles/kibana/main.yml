@@ -1,0 +1,16 @@
+---
+- name: Step 1 > Download kibana
+  get_url: url=https://artifacts.elastic.co/downloads/kibana/kibana-5.2.1-amd64.deb
+           dest=/opt/kibana-5.2.1-amd64.deb
+
+- name: Step 2 > Install kibana
+  shell: dpkg -i /opt/kibana-5.2.1-amd64.deb
+
+- name: Step 3 > Configure kibana
+  template: src=kibana.yml dest=/etc/kibana/kibana.yml mode=0755
+
+- name: Step 4 > Start kibana
+  shell: /etc/init.d/kibana start
+
+
+

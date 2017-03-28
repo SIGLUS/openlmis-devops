@@ -1,0 +1,16 @@
+---
+- name: Step 1 > Download metricbeat
+  get_url: url=https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-5.2.1-amd64.deb
+           dest=/opt/metricbeat-5.2.1-amd64.deb
+
+- name: Step 2 > Install metricbeat
+  shell: dpkg -i metricbeat-5.2.1-amd64.deb
+
+- name: Step 3 > Configure metricbeat
+  template: src=metricbeat.yml dest=/etc/metricbeat/metricbeat.yml mode=0755
+
+- name: Step 4 > Start metricbeat
+  shell: /etc/init.d/metricbeat start
+
+
+

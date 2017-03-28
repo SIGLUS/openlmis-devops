@@ -1,0 +1,10 @@
+---
+- hosts: qa-master
+  connection: ssh
+  sudo: yes
+  roles:
+    - oracle-java
+    - filebeat
+    - metricbeat
+    - elasticsearch
+    - kibana

@@ -1,0 +1,26 @@
+---
+- name: Step 1 > Download elasticsearch
+  get_url: url=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.2.1.tar.gz
+           dest=/opt/elasticsearch-5.2.1.tar.gz
+
+- name: Step 2 > Install elasticsearch
+  shell: /bin/tar -zxvf /opt/elasticsearch-5.2.1.tar.gz -C /opt
+
+- name: Step 3 > Add user "elk"
+  user: name=elk createhome=yes
+  sudo: True
+
+- name: Step 4 > Change ownership of elasticsearch installation
+  file: path=/opt/elasticsearch-5.2.1 owner=elk group=elk state=directory recurse=yes
+
+- name: Step 5 > Configure filebeat
+  template: src=elasticsearch.yml dest=/opt/elasticsearch-5.2.1/config/elasticsearch.yml owner=elk group=elk mode=0755
+
+- name: Step 6 > Start elasticsearch
+  shell: nohup /opt/elasticsearch-5.2.1/bin/elasticsearch &
+  sudo_user: elk
+
+
+
+
+
