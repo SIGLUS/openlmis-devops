@@ -1,0 +1,1 @@
+UPDATE products SET nos = FALSE;
