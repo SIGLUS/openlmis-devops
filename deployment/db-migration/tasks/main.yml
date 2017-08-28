@@ -15,6 +15,7 @@
   -password={{DBPASSWORD}}
   -table=one_time_migration_schema_version
   -placeholderReplacement=false
+  -outOfOrder=true
   -locations=filesystem:{{flyway_install_dir}}/sql/one-time-migration
   -X
   migrate"
