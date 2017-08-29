@@ -7,7 +7,6 @@
     - flyway
     - package
     - cubes
-    - db-migration
   vars:
     region: prod-master
 

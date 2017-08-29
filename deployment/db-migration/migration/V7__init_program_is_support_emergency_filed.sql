@@ -1,1 +1,0 @@
-UPDATE programs SET isSupportEmergency = TRUE WHERE code IN ('VIA','TEST_KIT','TB','MALARIA','PME','NUTRITION','ESS_MEDS');
