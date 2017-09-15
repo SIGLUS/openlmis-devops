@@ -16,3 +16,4 @@ classes
 .gradle
 *.DS_Store
 *.class
+*.retry

@@ -17,5 +17,6 @@
     - cubes
     - phantom
     - monitor
+    - docker-compose
   vars:
     region: ci
