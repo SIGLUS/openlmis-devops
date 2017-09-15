@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  server:
+    image: gocd/gocd-server:v17.10.0
+    ports:
+      - 8153:8153
+    volumes:
+      - godata_server:/godata
+
+  agent:
+    depends_on:
+      - server
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - GO_SERVER_URL=https://server:8154/go
+volumes:
+  godata_server:
