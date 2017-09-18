@@ -5,6 +5,12 @@
     dest: /home/ubuntu/siglus_infra
     update: yes
 
+- name: removing previous gocd services
+  command: docker-compose down
+  ignore_errors: yes
+  args:
+    chdir: /home/ubuntu/siglus_infra/ci/gocd
+
 - name: initialize gocd services
   command: docker-compose up -d
   args:
