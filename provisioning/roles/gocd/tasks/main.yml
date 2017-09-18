@@ -1,0 +1,11 @@
+---
+- name: git clone provision code
+  git:
+    repo: https://github.com/SIGLUS/openlmis-devops.git
+    dest: /home/ubuntu/siglus_infra
+    update: yes
+
+- name: initialize gocd services
+  command: docker-compose up -d
+  args:
+    chdir: /home/ubuntu/siglus_infra/ci/gocd
