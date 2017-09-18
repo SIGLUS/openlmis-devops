@@ -17,8 +17,5 @@
     - cubes
     - phantom
     - monitor
-    - docker
-    - docker-compose
-    - gocd
-  vars:
+ vars:
     region: ci

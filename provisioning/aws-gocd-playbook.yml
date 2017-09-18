@@ -1,0 +1,8 @@
+---
+- hosts: ci
+  connection: ssh
+  sudo: yes
+  roles:
+    - docker
+    - docker-compose
+    - gocd
