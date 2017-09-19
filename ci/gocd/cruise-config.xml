@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="87">
+  <server artifactsdir="artifacts">
+    <security>
+      <passwordFile path="/config/users_base" />
+      <roles>
+        <role name="ci">
+          <users>
+            <user>gocd_ci</user>
+          </users>
+        </role>
+       </roles>
+       <admins>
+         <user>gocd_admin</user>
+       </admins>
+    </security>
+  </server>
+</cruise>
