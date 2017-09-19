@@ -15,4 +15,10 @@
        </admins>
     </security>
   </server>
+  <config-repos>
+    <config-repo plugin="yaml.config.plugin">
+      <git url="https://github.com/SIGLUS/openlmis-pipelines.git" />
+    </config-repo>
+  </config-repos>
+  <pipelines group="openlmis" />
 </cruise>

@@ -2,4 +2,8 @@ FROM gocd/gocd-server:v17.10.0
 
 COPY users_base /config/
 COPY cruise-config.xml /godata/config/
-RUN chown go -R /config /godata/config/
+RUN chown go -R /config /godata/config/ && \
+    apk --update add ca-certificates openssl && \
+    update-ca-certificates && \
+    mkdir -p /godata/plugins/external/ && \
+    wget https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/0.5.0/yaml-config-plugin-0.5.0.jar -P /godata/plugins/external/
