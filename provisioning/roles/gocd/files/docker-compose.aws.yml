@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  server:
+    image: lmistrainingapp/gocd_server:0.0.1
+    ports:
+      - 8154:8154
+    volumes:
+      - godata_server_db:/godata/db
+      - godata_server_logs:/godata/logs
+      - godata_server_artifacts:/godata/artifacts
+
+  agent:
+    depends_on:
+      - server
+    image: lmistrainingapp/gocd_agent:0.0.1
+    environment:
+      - GO_SERVER_URL=https://server:8154/go
+volumes:
+  godata_server_db:
+  godata_server_logs:
+  godata_server_artifacts:

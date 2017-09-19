@@ -1,17 +1,26 @@
 ---
-- name: git clone provision code
-  git:
-    repo: https://github.com/SIGLUS/openlmis-devops.git
-    dest: /home/ubuntu/siglus_infra
-    update: yes
+- name: install docker-py package
+  pip:
+    name: docker-py
+
+- name: copy docker-compose file
+  copy:
+    src: docker-compose.aws.yml
+    dest: /home/ubuntu/docker-compose.aws.yml
 
 - name: removing previous gocd services
-  command: docker-compose down
+  command: docker-compose -f docker-compose.aws.yml down
   ignore_errors: yes
   args:
-    chdir: /home/ubuntu/siglus_infra/ci/gocd
+    chdir: /home/ubuntu/
+
+- name: login docker hub
+  docker_login:
+    username: lmistrainingapp
+    password: "{{docker_hub_password}}"
+    email: lmis.training@gmail.com
 
 - name: initialize gocd services
-  command: docker-compose up -d
+  command: docker-compose -f docker-compose.aws.yml up -d
   args:
-    chdir: /home/ubuntu/siglus_infra/ci/gocd
+    chdir: /home/ubuntu/
