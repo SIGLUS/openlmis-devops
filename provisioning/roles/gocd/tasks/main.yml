@@ -16,9 +16,9 @@
 
 - name: login docker hub
   docker_login:
-    username: lmistrainingapp
+    username: siglus
     password: "{{docker_hub_password}}"
-    email: lmis.training@gmail.com
+    email: siglusuio@thoughtworks.com
 
 - name: initialize gocd services
   command: docker-compose -f docker-compose.aws.yml up -d
