@@ -2,5 +2,4 @@ FROM gocd/gocd-agent-ubuntu-16.04:v17.10.0
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
-    apt-get install nodejs && \
-    apt-get install bzip2
+    apt-get install nodejs bzip2 openjdk-8-jdk -y

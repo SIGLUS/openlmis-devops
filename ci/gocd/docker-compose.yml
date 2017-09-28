@@ -14,11 +14,16 @@ services:
   agent:
     depends_on:
       - server
+      - db
     build:
       context: .
       dockerfile: Dockerfile.agent
     environment:
       - GO_SERVER_URL=https://server:8154/go
+
+  db:
+    image: "postgres:9.4"
+
 volumes:
   godata_server_db:
   godata_server_logs:
