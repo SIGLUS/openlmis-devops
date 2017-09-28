@@ -13,7 +13,7 @@ services:
     depends_on:
       - server
       - db
-    image: siglus/gocd_agent:0.0.2
+    image: siglus/gocd_agent:0.0.3
     environment:
       - GO_SERVER_URL=https://server:8154/go
 
