@@ -2,4 +2,8 @@ FROM gocd/gocd-agent-ubuntu-16.04:v17.10.0
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
-    apt-get install nodejs bzip2 openjdk-8-jdk -y
+    apt-get install nodejs bzip2 openjdk-8-jdk software-properties-common -y && \
+    add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" && \
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    apt-get update && \
+    apt-get install postgresql-9.4
