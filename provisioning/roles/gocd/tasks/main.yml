@@ -1,8 +1,4 @@
 ---
-- name: install docker-py package
-  pip:
-    name: docker-py
-
 - name: copy docker-compose file
   copy:
     src: docker-compose.aws.yml

@@ -1,6 +1,15 @@
 ---
- - name: install docker
-   shell: curl -sSL https://get.docker.com/ | sh
+ - name: uninstall older docker packages
+   pip:
+     name: "{{ item }}"
+     state: absent
+   with_items:
+     - docker-py
+     - docker
+
+ - name: install docker package
+   pip:
+     name: docker
 
  - name: creating docker group
    group: name=docker state=present
