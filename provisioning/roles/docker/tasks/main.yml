@@ -1,5 +1,10 @@
 ---
- - name: uninstall older docker packages
+ - name: install pip
+   apt:
+     name: python-pip
+     update_cache: yes
+
+ - name: uninstall older python-docker packages
    pip:
      name: "{{ item }}"
      state: absent
@@ -7,14 +12,15 @@
      - docker-py
      - docker
 
- - name: install docker package
+ - name: install docker
+   shell: curl -sSL https://get.docker.com/ | sh
+
+ - name: install python-docker packages
    pip:
      name: docker
 
- - name: creating docker group
+ - name: create docker group
    group: name=docker state=present
-   become: true
 
- - name: adding current user to docker group
-   user: name=ubuntu groups=docker append=yes
-   become: true
+ - name: add current user to docker group
+   user: name={{ ansible_user }} groups=docker append=yes
