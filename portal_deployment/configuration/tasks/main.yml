@@ -1,3 +1,3 @@
 ---
-- name: ping qa hosts
-  command: uname -a
+- name: Copy dependent files
+  copy: "src=env//{{ hostvars[inventory_hostname]['role'] }}/ dest={{application_dir}}/{{application_name}}/properties owner=middleware group=middleware mode=0644"
