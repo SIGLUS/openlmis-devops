@@ -4,6 +4,7 @@
   with_items:
     - db.jar
     - migration.jar
+  become: yes
 
 - name: Remove the dirctories of sql instance
   command: "rm -rf {{flyway_install_dir}}/sql/{{item}}"
