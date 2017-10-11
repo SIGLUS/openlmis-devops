@@ -7,7 +7,6 @@
   roles:
     - flyway
 
-- hosts: slave
-  tasks:
-    - debug:
-        msg: "{{ role }}"
+- hosts: qa
+  roles:
+    - package

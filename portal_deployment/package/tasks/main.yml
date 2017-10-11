@@ -1,0 +1,27 @@
+---
+- name: Copy artifacts
+  copy: "src=libs//{{ artifact }} dest={{ application_dir }}/{{ application_name }}/artifact/"
+  become: yes
+
+- name: Stop tomcat service
+  service: name=tomcat state=stopped
+
+- name: Move previous deployment artifact to artifact_last directory
+  command: "mv {{ application_dir }}/{{ application_name }}/webapps/ROOT.war {{ application_dir }}/{{ application_name }}/artifact_last/"
+  ignore_errors: yes
+
+- name: Move previous deployment cache
+  command: "rm -rf {{ application_dir }}/{{ application_name }}/webapps/ROOT"
+
+- name: Copy current deployment artifact
+  command: "cp {{ application_dir }}/{{ application_name }}/artifact/{{ artifact }} {{ application_dir }}/{{ application_name }}/webapps/ROOT.war"
+
+- name: Update application version in app properties
+  command: "echo 'app.version={{ build_no }}' >> {{ application_dir }}/{{ application_name }}/properties/app.properties"
+
+- name: Restart tomcat service
+  service: name=tomcat state=restarted
+
+- name: Confirm application runs
+  register: application_ok
+  wait_for: port={{ http_port }}

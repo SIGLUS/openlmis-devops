@@ -1,0 +1,4 @@
+---
+  application_dir: /app/tomcat
+  application_name: openlmis
+  http_port: 8000
