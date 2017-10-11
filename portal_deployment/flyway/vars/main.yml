@@ -1,0 +1,5 @@
+---
+  flyway_install_dir: /opt/flyway-commandline
+  dbhost_master: localhost
+  dbport: 5432
+  dbname: open_lmis

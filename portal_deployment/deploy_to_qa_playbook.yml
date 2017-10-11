@@ -2,3 +2,12 @@
 - hosts: qa
   roles:
     - configuration
+
+- hosts: master
+  roles:
+    - flyway
+
+- hosts: slave
+  tasks:
+    - debug:
+        msg: "{{ role }}"
