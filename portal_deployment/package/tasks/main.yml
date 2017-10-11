@@ -1,23 +1,23 @@
 ---
 - name: Copy artifacts
   copy: "src=libs//{{ artifact }} dest={{ application_dir }}/{{ application_name }}/artifact/"
-  become: yes
+  sudo_user: middleware
 
 - name: Stop tomcat service
   service: name=tomcat state=stopped
+  sudo_user: middleware
 
 - name: Move previous deployment artifact to artifact_last directory
   command: "mv {{ application_dir }}/{{ application_name }}/webapps/ROOT.war {{ application_dir }}/{{ application_name }}/artifact_last/"
-  ignore_errors: yes
-  become: yes
+  sudo_user: middleware
 
 - name: Move previous deployment cache
   command: "rm -rf {{ application_dir }}/{{ application_name }}/webapps/ROOT"
-  become: yes
+  sudo_user: middleware
 
 - name: Copy current deployment artifact
   command: "cp {{ application_dir }}/{{ application_name }}/artifact/{{ artifact }} {{ application_dir }}/{{ application_name }}/webapps/ROOT.war"
-  become: yes
+  sudo_user: middleware
 
 # TODO: Remove this step after solving app.version management in openlmis
 #- name: Update application version in app properties
@@ -25,6 +25,7 @@
 
 - name: Restart tomcat service
   service: name=tomcat state=restarted
+  sudo_user: middleware
 
 - name: Confirm application runs
   register: application_ok
