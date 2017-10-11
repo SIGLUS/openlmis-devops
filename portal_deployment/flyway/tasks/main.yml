@@ -6,23 +6,26 @@
     - migration.jar
   become: yes
 
-- name: Remove the dirctories of sql instance
+- name: Remove the directories of sql instance
   command: "rm -rf {{flyway_install_dir}}/sql/{{item}}"
   with_items:
       - db
       - migration
+  become: yes
 
-- name: Initialize the dirctories of sql instance
+- name: Initialize the directories of sql instance
   file: path={{flyway_install_dir}}/sql/{{item}} mode=0755 state=directory
   with_items:
       - db
       - migration
+  become: yes
 
 - name: Unzip sql file jar
   command: "unzip {{application_dir}}/{{application_name}}/db/{{item}}.jar -d {{flyway_install_dir}}/sql/{{item}}"
   with_items:
       - db
       - migration
+  become: yes
 
 - name: Migrate db module
   command: "{{flyway_install_dir}}/flyway
