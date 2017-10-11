@@ -1,6 +1,6 @@
 ---
 - name: Copy artifacts
-  copy: "src={{ item }}/ dest={{application_dir}}/{{application_name}}/db/"
+  copy: "src=libs//{{ item }} dest={{application_dir}}/{{application_name}}/db/"
   with_items:
     - db.jar
     - migration.jar
