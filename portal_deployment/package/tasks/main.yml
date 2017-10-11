@@ -9,12 +9,15 @@
 - name: Move previous deployment artifact to artifact_last directory
   command: "mv {{ application_dir }}/{{ application_name }}/webapps/ROOT.war {{ application_dir }}/{{ application_name }}/artifact_last/"
   ignore_errors: yes
+  become: yes
 
 - name: Move previous deployment cache
   command: "rm -rf {{ application_dir }}/{{ application_name }}/webapps/ROOT"
+  become: yes
 
 - name: Copy current deployment artifact
   command: "cp {{ application_dir }}/{{ application_name }}/artifact/{{ artifact }} {{ application_dir }}/{{ application_name }}/webapps/ROOT.war"
+  become: yes
 
 # TODO: Remove this step after solving app.version management in openlmis
 #- name: Update application version in app properties
