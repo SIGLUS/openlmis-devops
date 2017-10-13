@@ -43,4 +43,13 @@ describe 'Dockerfile.taskrunner' do
       expect(package_notifier.installed?).to be_truthy
     end
   end
+
+  describe 'Users' do
+    context 'go' do
+      it 'exists' do
+        response = user('go')
+        expect(response.exists?). to be_truthy
+      end
+    end
+  end
 end
