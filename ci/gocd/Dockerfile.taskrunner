@@ -1,0 +1,8 @@
+FROM openjdk:7u151-jdk
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh \
+&&  bash nodesource_setup.sh \
+&&  apt-get install nodejs bzip2 software-properties-common wget -y \
+&&  echo 'deb http://http.debian.net/debian jessie-backports main' > /etc/apt/sources.list.d/backports.list \
+&&  apt-get update \
+&&  apt-get -t jessie-backports install postgresql-client-9.4 zip ansible -y

@@ -18,10 +18,20 @@ describe 'Dockerfile.agent' do
   end
 
   describe 'Dependencies' do
-    context 'about jdk' do
-      it 'has installed openjdk-1.7' do
-        package_notifier = package('openjdk-7-jdk')
-        expect(package_notifier.installed?).to be_truthy
+    context 'about Docker' do
+
+      it 'has docker group' do
+        response = group('docker')
+        expect(response.exists?).to be_truthy
+      end
+
+      describe user('go') do
+          it { should belong_to_group 'docker'  }
+      end
+
+      it 'has installed docker client only from go user session' do
+        response = command('su -c "/usr/bin/docker --version" go')
+        expect(response.stdout).to match 'Docker version 17.03.0-ce'
       end
     end
   end

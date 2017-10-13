@@ -12,14 +12,17 @@ services:
       - godata_server_artifacts:/godata/artifacts
 
   agent:
-    depends_on:
-      - server
-      - db
     build:
       context: .
       dockerfile: Dockerfile.agent
+    depends_on:
+      - db
+      - server
     environment:
       - GO_SERVER_URL=https://server:8154/go
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /godata
 
   db:
     image: "postgres:9.4"

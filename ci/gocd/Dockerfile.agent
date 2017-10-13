@@ -1,11 +1,10 @@
 FROM gocd/gocd-agent-ubuntu-16.04:v17.10.0
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh && \
-    bash nodesource_setup.sh && \
-    apt-get install nodejs bzip2 openjdk-8-jdk software-properties-common wget -y && \
-    add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" && \
-    add-apt-repository ppa:ansible/ansible && \
-    add-apt-repository ppa:openjdk-r/ppa && \
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
-    apt-get update && \
-    apt-get install postgresql-client-9.4 zip ansible openjdk-7-jdk -y
+RUN apt-get update \
+&&  apt-get install wget \
+&&  wget https://download.docker.com/linux/static/stable/x86_64/docker-17.03.0-ce.tgz \
+&&  tar xzvf docker-17.03.0-ce.tgz \
+&&  cp docker/docker /usr/bin/ \
+&&  rm -rf docker docker-17.03.0-ce.tgz \
+&&  groupadd docker \
+&&  usermod -aG docker go
