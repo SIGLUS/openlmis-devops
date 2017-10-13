@@ -13,9 +13,12 @@ services:
     depends_on:
       - server
       - db
-    image: siglus/gocd_agent:0.0.6
+    image: siglus/gocd_agent:0.1.0
     environment:
       - GO_SERVER_URL=https://server:8154/go
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /godata
 
   db:
     image: "postgres:9.4"

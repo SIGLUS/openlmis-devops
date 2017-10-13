@@ -6,3 +6,5 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh \
 &&  echo 'deb http://http.debian.net/debian jessie-backports main' > /etc/apt/sources.list.d/backports.list \
 &&  apt-get update \
 &&  apt-get -t jessie-backports install postgresql-client-9.4 zip ansible -y
+
+COPY files/java.security /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/security/

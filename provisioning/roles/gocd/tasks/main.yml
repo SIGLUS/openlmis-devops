@@ -1,14 +1,19 @@
 ---
-- name: copy docker-compose file
+- name: create gocd directory
+  file:
+    path: /home/ubuntu/gocd
+    state: directory
+
+- name: copy docker-compose folder
   copy:
     src: docker-compose.aws.yml
-    dest: /home/ubuntu/docker-compose.aws.yml
+    dest: /home/ubuntu/gocd
 
 - name: removing previous gocd services
   command: docker-compose -f docker-compose.aws.yml down
   ignore_errors: yes
   args:
-    chdir: /home/ubuntu/
+    chdir: /home/ubuntu/gocd
 
 - name: login docker hub
   docker_login:
@@ -19,4 +24,4 @@
 - name: initialize gocd services
   command: docker-compose -f docker-compose.aws.yml up -d --scale agent=2
   args:
-    chdir: /home/ubuntu/
+    chdir: /home/ubuntu/gocd
