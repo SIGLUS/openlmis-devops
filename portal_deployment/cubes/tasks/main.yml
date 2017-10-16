@@ -1,0 +1,12 @@
+---
+- name: Copy artifact
+  copy: "src={{ cubes_artifact }} dest={{ cubes_home }}/"
+
+- name: Stop cubes service
+  service: name=cubes state=stopped
+
+- name: Unzip artifact
+  command: "unzip -o {{ cubes_home }}/{{ cubes_artifact }} -d {{ cubes_home }}/"
+
+- name: Restart cubes service
+  service: name=cubes state=restarted

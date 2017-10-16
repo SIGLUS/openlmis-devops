@@ -10,3 +10,4 @@
 - hosts: qa
   roles:
     - package
+    - cubes
