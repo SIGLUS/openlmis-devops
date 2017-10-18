@@ -1,0 +1,27 @@
+---
+- hosts: uat-master
+  connection: ssh
+  sudo: yes
+  roles:
+    - base
+    - openjdk-java
+    - tomcat
+    - flyway
+    - cubes
+    - phantom
+    - nfs_server
+  vars:
+    region: uat-master
+
+- hosts: uat-slave
+  connection: ssh
+  sudo: yes
+  roles:
+    - base
+    - openjdk-java
+    - tomcat
+    - cubes
+    - phantom
+    - nfs_client
+  vars:
+    region: uat-slave

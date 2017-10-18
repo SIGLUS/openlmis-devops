@@ -77,7 +77,3 @@
 
 - name: Step 14 > Start Tomcat
   service: name=tomcat state=restarted enabled=yes
-
-
-- name: Step 15 > verify for tomcat to start
-  wait_for: port={{ http_port }}

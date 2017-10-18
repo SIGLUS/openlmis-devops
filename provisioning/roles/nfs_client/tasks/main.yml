@@ -1,12 +1,12 @@
 ---
-  - name: Update apt cache
-    apt: update-cache=yes cache_valid_time=86400
-    sudo: yes
+- name: Create emailattachment folder
+  file: name=/app/tomcat/openlmis/emailattachment state=directory owner=middleware group=middleware
+  become: yes
 
-  - name: Install nfs-common
-    sudo: yes
-    apt: pkg=nfs-common state=latest
+- name: Install nfs-common
+  sudo: yes
+  apt: pkg='nfs-common' state=latest
 
-  - name: Mount NFS
-    sudo: yes
-    command: mount {{ nfs_server_host }}:/app/tomcat/openlmis/emailattachment /app/tomcat/openlmis/emailattachment
+- name: Mount NFS
+  sudo: yes
+  command: mount {{ nfs_server_host }}:/app/tomcat/openlmis/emailattachment /app/tomcat/openlmis/emailattachment

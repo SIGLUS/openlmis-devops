@@ -1,0 +1,13 @@
+---
+- hosts: uat
+  roles:
+    - configuration
+
+- hosts: master
+  roles:
+    - flyway
+
+- hosts: uat
+  roles:
+    - package
+    - cubes

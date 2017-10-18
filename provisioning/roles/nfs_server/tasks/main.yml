@@ -1,20 +1,20 @@
 ---
-    - name: Update apt cache
-      apt: update-cache=yes cache_valid_time=86400
-      sudo: yes
+- name: Create emailattachment folder
+  file: name=/app/tomcat/openlmis/emailattachment state=directory owner=middleware group=middleware
+  become: yes
 
-    - name: Install nfs-kernel-server
-      sudo: yes
-      apt: pkg=nfs-kernel-server state=latest
+- name: Install nfs-kernel-server
+  sudo: yes
+  apt: pkg='nfs-kernel-server' state=latest
 
-    - name: Update exports file
-      sudo: yes
-      template: src=exports dest=/etc/exports
+- name: Update exports file
+  sudo: yes
+  template: src=exports dest=/etc/exports
 
-    - name: Re-read exports file
-      sudo: yes
-      command: exportfs -r
+- name: Re-read exports file
+  sudo: yes
+  command: exportfs -r
 
-    - name: Restart NFS server
-      sudo: yes
-      command: service nfs-kernel-server restart
+- name: Restart NFS server
+  sudo: yes
+  command: service nfs-kernel-server restart

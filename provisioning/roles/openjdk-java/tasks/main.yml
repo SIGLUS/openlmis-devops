@@ -1,0 +1,8 @@
+---
+  - name: Install OpenJDK Java Repo Installer Repository
+    apt_repository: repo='ppa:openjdk-r/ppa' update-cache=yes
+    sudo: yes
+
+  - name: Install OpenJDK Java 7
+    apt: pkg='openjdk-7-jdk'
+    sudo: yes

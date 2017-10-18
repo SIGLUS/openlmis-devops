@@ -3,7 +3,6 @@
     - name: Step 1 >Install pip and virtualenv
       sudo: yes
       apt: pkg={{ item }} state=present
-      tags: [packages]
       with_items:
         - python-pip
         - python-virtualenv

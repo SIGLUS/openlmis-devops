@@ -1,9 +1,4 @@
 ---
-
-    - name: Update apt cache
-      apt: update-cache=yes cache_valid_time=86400
-      sudo: yes
-
-    - name: install phantomjs 2.0
-      sudo: yes
-      apt: pkg=phantomjs
+  - name: install phantomjs 2.0
+    sudo: yes
+    apt: pkg='phantomjs'
