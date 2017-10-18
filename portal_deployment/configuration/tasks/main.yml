@@ -5,52 +5,52 @@
 
 - name: Replace configurations in app.properties file
   lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/app.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/app.properties'
     regexp: 'app.version'
     line: 'app.version={{ openlmis_version }}'
   become: yes
 
 - name: Replace configurations in atomfeed.properties file
   lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/atomfeed.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/atomfeed.properties'
     regexp: 'jdbc.username'
     line: 'jdbc.username={{ dbuser }}'
   become: yes
 
 - lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/atomfeed.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/atomfeed.properties'
     regexp: 'jdbc.password'
     line: 'jdbc.password={{ dbpassword }}'
   become: yes
 
 - name: Replace configurations in default.properties file
   lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
     regexp: 'openlmis.jdbc.username'
     line: 'openlmis.jdbc.username={{ dbuser }}'
   become: yes
 
 - lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
     regexp: 'openlmis.jdbc.password'
     line: 'openlmis.jdbc.password={{ dbpassword }}'
   become: yes
 
 - lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
     regexp: 'openlmis.replication.jdbc.username'
     line: 'openlmis.replication.jdbc.username={{ dbuser }}'
   become: yes
 
 - lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
     regexp: 'openlmis.replication.jdbc.password'
     line: 'openlmis.replication.jdbc.password={{ dbpassword }}'
   become: yes
 
 - name: Replace configurations in mailing.properties file
   lineinfile:
-    path: '{{ application_dir }}/{{ application_name }}/properties/mailing.properties'
+    dest: '{{ application_dir }}/{{ application_name }}/properties/mailing.properties'
     regexp: 'mail.sender.password'
     line: 'mail.sender.password={{ mailpassword }}'
   become: yes
