@@ -5,7 +5,9 @@
 
 - name: Copy scripts
   copy: "src=scripts/ dest=/tmp/"
+  become: yes
 
 - name: Replace configuration files
   command: ruby /tmp/replace_configuration.rb
+  become: yes
 
