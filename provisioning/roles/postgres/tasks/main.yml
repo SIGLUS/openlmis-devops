@@ -2,16 +2,17 @@
 - include: add-apt-repo-for-postgres.yml
 
 - name: Install postgresql
-  apt: pkg={{item}} state=present update_cache=yes cache_valid_time=3600 force=yes
+  apt: pkg='{{item}}' state=present
   with_items:
     - libpq-dev
     - postgresql-client
-    - postgresql-contrib-{{ postgres_version }}
-    - postgresql-{{ postgres_version }}
+    - 'postgresql-contrib-{{ postgres_version }}'
+    - 'postgresql-{{ postgres_version }}'
     - python-psycopg2
+  become: yes
 
 
-- name:  Initialize the dirctories of postgres instance
+- name:  Initialize the directories of postgres instance
   tags: postgres
   file: path=/app/postgres/data owner=postgres group=postgres mode=0700 state=directory
 
@@ -20,9 +21,9 @@
 
 
 - name: Setup the env variables
-  template: src={{item}} dest={{postgres_home}}{{item}} owner=postgres group=postgres
+  template: src='{{item}}' dest={{postgres_home}}{{item}} owner=postgres group=postgres
   with_items:
-     - pg_hba.conf.master
+     - pg_hba.conf
      - postgresql.conf.master
      - postgresql.conf.slave
      - recovery.conf.slave

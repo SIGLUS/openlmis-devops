@@ -1,32 +1,27 @@
 ---
 - name: Ensure database is created
-  postgresql_db: name={{dbname}}
-  sudo_user: postgres
+  postgresql_db: name='{{dbname}}' state=present
+  become_user: postgres
 
 - name: Ensure user has access to database
-  postgresql_user: db={{dbname}} name={{dbuser}} password={{DBPASSWORD}} priv=ALL
-  sudo_user: postgres
+  postgresql_user: db='{{dbname}}' name='{{dbuser}}' password='{{DBPASSWORD}}' priv=ALL
+  become_user: postgres
 
 - name: Ensure user does not have unnecessary privilege
-  postgresql_user: name={{dbuser}} role_attr_flags=SUPERUSER,NOCREATEDB
-  sudo_user: postgres
+  postgresql_user: name='{{dbuser}}' role_attr_flags=SUPERUSER,NOCREATEDB
+  become_user: postgres
 
 - name: Grant postgres privileges
-  command: "psql -c 'GRANT postgres TO {{dbuser}}' -d {{dbname}}"
-  sudo_user: postgres
+  command: "psql -U postgres -c 'GRANT postgres TO {{dbuser}}' -d {{dbname}}"
 
 - name: Delete schema public
-  command: "psql -c 'drop SCHEMA  IF EXISTS public CASCADE' -d {{dbname}}"
-  sudo_user: postgres
+  command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS public CASCADE' -d {{dbname}}"
 
 - name: Create schema public
-  command: "psql -c 'CREATE SCHEMA public AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
-  sudo_user: postgres
+  command: "psql -U postgres -c 'CREATE SCHEMA public AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
 
 - name: Delete schema atomfeed
-  command: "psql -c 'drop SCHEMA  IF EXISTS atomfeed CASCADE' -d {{dbname}}"
-  sudo_user: postgres
+  command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS atomfeed CASCADE' -d {{dbname}}"
 
 - name: Create schema atomfeed
-  command: "psql -c 'CREATE SCHEMA atomfeed AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
-  sudo_user: postgres
+  command: "psql -U postgres -c 'CREATE SCHEMA atomfeed AUTHORIZATION  {{dbuser}}' -d {{dbname}}"

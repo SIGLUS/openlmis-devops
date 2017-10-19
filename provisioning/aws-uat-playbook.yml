@@ -1,11 +1,12 @@
 ---
 - hosts: uat-master
   connection: ssh
-  sudo: yes
   roles:
     - base
     - openjdk-java
     - tomcat
+    - postgres
+    - postgres-init
     - flyway
     - cubes
     - phantom
