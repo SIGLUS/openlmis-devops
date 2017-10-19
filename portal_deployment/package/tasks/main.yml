@@ -10,6 +10,7 @@
 - name: Move previous deployment artifact to artifact_last directory
   command: "mv {{ application_dir }}/{{ application_name }}/webapps/ROOT.war {{ application_dir }}/{{ application_name }}/artifact_last/"
   become: yes
+  ignore_errors: yes
 
 - name: Move previous deployment cache
   command: "rm -rf {{ application_dir }}/{{ application_name }}/webapps/ROOT"
