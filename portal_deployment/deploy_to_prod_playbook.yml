@@ -1,0 +1,17 @@
+---
+- hosts: prod
+  tasks:
+    - name: Pinging hosts
+      command: uname -a
+#- hosts: uat
+  #roles:
+    #- configuration
+
+#- hosts: uat-master
+  #roles:
+    #- flyway
+
+#- hosts: uat
+  #roles:
+    #- package
+    #- cubes
