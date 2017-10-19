@@ -1,56 +1,13 @@
 ---
-- name: Copy dependent files
-  copy: "src=env//{{ hostvars[inventory_hostname]['role'] }}/ dest={{application_dir}}/{{application_name}}/properties owner=middleware group=middleware mode=0644"
-  become: yes
-
-- name: Replace configurations in app.properties file
-  lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/app.properties'
-    regexp: 'app.version'
-    line: 'app.version={{ openlmis_version }}'
-  become: yes
-
-- name: Replace configurations in atomfeed.properties file
-  lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/atomfeed.properties'
-    regexp: 'jdbc.username'
-    line: 'jdbc.username={{ dbuser }}'
-  become: yes
-
-- lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/atomfeed.properties'
-    regexp: 'jdbc.password'
-    line: 'jdbc.password={{ dbpassword }}'
-  become: yes
-
-- name: Replace configurations in default.properties file
-  lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
-    regexp: 'openlmis.jdbc.username'
-    line: 'openlmis.jdbc.username={{ dbuser }}'
-  become: yes
-
-- lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
-    regexp: 'openlmis.jdbc.password'
-    line: 'openlmis.jdbc.password={{ dbpassword }}'
-  become: yes
-
-- lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
-    regexp: 'openlmis.replication.jdbc.username'
-    line: 'openlmis.replication.jdbc.username={{ dbuser }}'
-  become: yes
-
-- lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/default.properties'
-    regexp: 'openlmis.replication.jdbc.password'
-    line: 'openlmis.replication.jdbc.password={{ dbpassword }}'
-  become: yes
-
-- name: Replace configurations in mailing.properties file
-  lineinfile:
-    dest: '{{ application_dir }}/{{ application_name }}/properties/mailing.properties'
-    regexp: 'mail.sender.password'
-    line: 'mail.sender.password={{ mailpassword }}'
+- name: Copy configuration files
+  template:
+    src: "{{ hostvars[inventory_hostname]['role'] }}/{{ item }}"
+    dest: "{{ application_dir }}/{{ application_name }}/properties/{{ item }}"
+    owner: middleware
+    group: middleware
+  with_items:
+    - app.properties
+    - atomfeed.properties
+    - default.properties
+    - mailing.properties
   become: yes
