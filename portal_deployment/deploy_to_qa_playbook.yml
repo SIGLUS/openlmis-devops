@@ -3,7 +3,7 @@
   roles:
     - configuration
 
-- hosts: qa_master
+- hosts: qa-master
   roles:
     - flyway
 

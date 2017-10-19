@@ -3,7 +3,7 @@
   roles:
     - configuration
 
-- hosts: uat_master
+- hosts: uat-master
   roles:
     - flyway
 
