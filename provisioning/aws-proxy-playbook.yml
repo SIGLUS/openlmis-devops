@@ -1,0 +1,9 @@
+---
+- hosts: proxy
+  become: true
+  roles:
+    - docker
+    - docker-compose
+  tasks:
+  - name: Run gocd agent
+    command: docker run -d -v /var/run/docker.sock:/var/run/docker.sock -v /godata -e GO_SERVER_URL=https://{{ gocd_server_ip }}:8154/go siglus/gocd_agent:0.1.0

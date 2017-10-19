@@ -6,3 +6,6 @@ master ansible_host=13.115.159.46 ansible_user=ubuntu ansible_ssh_private_key_fi
 
 [uat-slave]
 slave ansible_host=54.65.42.27 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/openlmis.pem
+
+[proxy]
+proxy ansible_host=52.74.143.249 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/deploy_server.pem
