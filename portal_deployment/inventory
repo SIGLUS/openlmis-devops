@@ -7,7 +7,7 @@ uat-master ansible_host=13.115.159.46 ansible_user=ubuntu role=uat-master artifa
 uat-slave ansible_host=54.65.42.27 ansible_user=ubuntu role=uat-slave artifact=openlmis-web-slave.war cubes_artifact=cubes.zip
 
 [prod]
-prod-db-master ansible_host=172.31.4.20 ansible_user=deployuser
-prod-db-slave  ansible_host=172.31.1.119 ansible_user=deployuser
-prod-web-master ansible_host=172.31.13.52 ansible_user=deployuser
-prod-web-slave  ansible_host=172.31.12.55 ansible_user=deployuser
+prod-db-master ansible_host=172.31.4.20 ansible_user=ubuntu
+prod-db-slave  ansible_host=172.31.1.119 ansible_user=ubuntu
+prod-web-master ansible_host=172.31.13.52 ansible_user=ubuntu
+prod-web-slave  ansible_host=172.31.12.55 ansible_user=ubuntu
