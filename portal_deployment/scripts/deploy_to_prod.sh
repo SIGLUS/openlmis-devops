@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 pushd portal_deployment/scripts/
   echo "Decoding ssh key..."
   python file_decoder.py $SSH_KEY decoded_openlmis.pem
