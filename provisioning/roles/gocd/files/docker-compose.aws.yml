@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   server:
-    image: siglus/gocd_server:0.0.1
+    image: siglus/gocd_server:0.0.2
     ports:
       - 8154:8154
     volumes:
