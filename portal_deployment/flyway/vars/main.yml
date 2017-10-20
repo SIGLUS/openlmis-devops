@@ -2,6 +2,5 @@
   application_dir: /app/tomcat
   application_name: openlmis
   flyway_install_dir: /opt/flyway-commandline
-  dbhost_master: localhost
   dbport: 5432
   dbname: open_lmis
