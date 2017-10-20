@@ -5,5 +5,13 @@
     - docker
     - docker-compose
   tasks:
+  - name: Stop gocd agent
+    command: docker stop prod_deployment_agent
+    ignore_errors: yes
+
+  - name: Remove gocd agent
+    command: docker rm prod_deployment_agent
+    ignore_errors: yes
+
   - name: Run gocd agent
-    command: docker run -d -v /var/run/docker.sock:/var/run/docker.sock -v /godata -e GO_SERVER_URL=https://{{ gocd_server_ip }}:8154/go siglus/gocd_agent:0.1.0
+    command: docker run -d -v /var/run/docker.sock:/var/run/docker.sock -v /godata --name prod_deployment_agent -e GO_SERVER_URL=https://{{ gocd_server_ip }}:8154/go siglus/gocd_agent:0.1.0
