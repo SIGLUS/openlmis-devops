@@ -1,10 +1,9 @@
 ---
 - hosts: qa-master
   connection: ssh
-  sudo: yes
   roles:
     - base
-    - oracle-java
+    - openjdk-java
     - tomcat
     - postgres
     - postgres-init
@@ -12,7 +11,6 @@
     - cubes
     - phantom
     - nfs_server
-    - letsencrypt
   vars:
     region: qa-master
 
@@ -21,7 +19,7 @@
   sudo: yes
   roles:
     - base
-    - oracle-java
+    - openjdk-java
     - tomcat
     - cubes
     - phantom
