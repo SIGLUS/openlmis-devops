@@ -9,11 +9,22 @@ services:
       - godata_server_logs:/godata/logs
       - godata_server_artifacts:/godata/artifacts
 
-  agent:
+  portal_agent:
     depends_on:
       - server
       - db
     image: siglus/gocd_agent:0.1.0
+    environment:
+      - GO_SERVER_URL=https://server:8154/go
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /godata
+
+  mobile_agent:
+    depends_on:
+      - server
+      - db
+    image: siglus/gocd_agent:0.1.0-mobile
     environment:
       - GO_SERVER_URL=https://server:8154/go
     volumes:

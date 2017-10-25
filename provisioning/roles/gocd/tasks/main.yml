@@ -9,12 +9,6 @@
     src: docker-compose.aws.yml
     dest: /home/ubuntu/gocd
 
-- name: removing previous gocd services
-  command: docker-compose -f docker-compose.aws.yml down
-  ignore_errors: yes
-  args:
-    chdir: /home/ubuntu/gocd
-
 - name: login docker hub
   docker_login:
     username: siglus
@@ -22,6 +16,6 @@
     email: siglusuio@thoughtworks.com
 
 - name: initialize gocd services
-  command: docker-compose -f docker-compose.aws.yml up -d --scale agent=2
+  command: docker-compose -f docker-compose.aws.yml up -d --remove-orphans --scale portal_agent=2 --scale mobile_agent=2
   args:
     chdir: /home/ubuntu/gocd

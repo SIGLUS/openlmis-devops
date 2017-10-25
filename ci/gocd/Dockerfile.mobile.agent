@@ -1,0 +1,8 @@
+FROM siglus/gocd_agent:0.1.0
+
+ENV LC_ALL=C
+
+RUN apt-get install adb ruby python-pip python-dev build-essential -y \
+&&  curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
+&&  chmod a+x /usr/local/bin/docker-compose \
+&&  pip install awscli
