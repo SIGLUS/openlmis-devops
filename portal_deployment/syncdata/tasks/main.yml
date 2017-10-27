@@ -21,11 +21,11 @@
   become: yes
 
 - name: Copy database backup
-  copy: "src=backups/*.sql dest=/home/ubuntu/"
+  copy: "src=backups dest=/home/ubuntu/"
   become: yes
 
 - name: Copy sql scripts
-  copy: "src=sql/change_passwords.sql dest=/home/ubuntu/"
+  copy: "src=sql dest=/home/ubuntu/"
   become: yes
 
 - name: Load anonymized prod data
