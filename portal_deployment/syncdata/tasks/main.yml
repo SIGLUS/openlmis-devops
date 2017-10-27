@@ -9,6 +9,9 @@
   command: "service postgresql start"
   become: yes
 
+- name: Termine sessions
+  command: psql -U postgres -c "pg_terminate_backend(pid) from pg_stat_activity where datname='{{dbname}}'"
+
 - name: Drop current DB
   command: "dropdb {{dbname}} -U {{dbuser}}"
   become: yes
