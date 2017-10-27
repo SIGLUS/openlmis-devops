@@ -1,3 +1,5 @@
+DROP MATERIALIZED VIEW vw_carry_start_dates;
+
 CREATE MATERIALIZED VIEW vw_carry_start_dates AS
   SELECT
     uuid_in(md5(random() :: TEXT || now() :: TEXT) :: cstring) AS uuid,
