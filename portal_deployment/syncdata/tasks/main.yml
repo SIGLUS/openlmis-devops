@@ -29,7 +29,7 @@
   become: yes
 
 - name: Load anonymized prod data
-  command: "pg_restore -Fc /home/ubuntu/backups/openlmis-backup-*"
+  command: "pg_restore -Fc /home/ubuntu/backups/openlmis-backup-2017-10-26-22-20"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
