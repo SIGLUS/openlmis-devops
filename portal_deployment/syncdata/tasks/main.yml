@@ -7,18 +7,23 @@
 
 - name: Start postgres server
   command: "service postgresql start"
+  become: yes
 
 - name: Drop current DB
   command: "dropdb {{dbname}} -U {{dbuser}}"
+  become: yes
 
 - name: Create DB
   command: "createdb {{dbname}} -U {{dbuser}}"
+  become: yes
 
 - name: Copy database backup
   copy: "src=backups/*.sql dest=/home/ubuntu/"
+  become: yes
 
 - name: Copy sql scripts
   copy: "src=sql/change_passwords.sql dest=/home/ubuntu/"
+  become: yes
 
 - name: Load anonymized prod data
   command: "pgrestore -Fc --file /home/ubuntu/openlmis-backup-*"
@@ -28,6 +33,8 @@
 
 - name: Cleaning up
   command: "rm -rf /home/ubuntu/*.sql /home/ubuntu/openlmis-backup-*"
+  become: yes
 
 - name: Start app
   command: "sudo service tomcat start"
+  become: yes
