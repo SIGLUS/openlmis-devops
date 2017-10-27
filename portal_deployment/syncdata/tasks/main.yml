@@ -1,0 +1,33 @@
+---
+- name: Stop app
+  command: "service tomcat stop"
+
+- name: Stop all postgres process
+  command: "pkill postgres"
+
+- name: Start postgres server
+  command: "service postgresql start"
+
+- name: Drop current DB
+  command: "dropdb {{dbname}} -U {{dbuser}}"
+
+- name: Create DB
+  command: "createdb {{dbname}} -U {{dbuser}}"
+
+- name: Copy database backup
+  copy: "src=backups/*.sql dest=/home/ubuntu/"
+
+- name: Copy sql scripts
+  copy: "src=sql/change_passwords.sql dest=/home/ubuntu/"
+
+- name: Load anonymized prod data
+  command: "pgrestore -Fc --file /home/ubuntu/openlmis-backup-*"
+
+- name: Change passwords
+  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/change_passwords.sql"
+
+- name: Cleaning up
+  command: "rm -rf /home/ubuntu/*.sql /home/ubuntu/openlmis-backup-*"
+
+- name: Start app
+  command: "sudo service tomcat start"

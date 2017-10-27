@@ -1,0 +1,4 @@
+---
+- hosts: uat-master
+  roles:
+    - syncdata
