@@ -1,3 +1,5 @@
+DROP MATERIALIZED VIEW vw_period_movements;
+
 CREATE MATERIALIZED VIEW vw_period_movements AS
   (SELECT
      uuid_in(md5(random() :: TEXT || now() :: TEXT) :: cstring) AS uuid,
@@ -33,4 +35,6 @@ CREATE MATERIALIZED VIEW vw_period_movements AS
      JOIN geographic_zones AS parent_zone
        ON ZONE.parentid = parent_zone.id);
 
-CREATE UNIQUE INDEX idx_vw_period_movements ON vw_period_movements (uuid,periodStart,periodEnd,facility_code);
+DROP INDEX IF EXISTS idx_vw_period_movements;
+CREATE UNIQUE INDEX idx_vw_period_movements
+  ON vw_period_movements (uuid, periodStart, periodEnd, facility_code);
