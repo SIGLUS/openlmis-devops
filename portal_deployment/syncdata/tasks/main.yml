@@ -29,13 +29,13 @@
   become: yes
 
 - name: Load anonymized prod data
-  command: "pgrestore -Fc --file /home/ubuntu/openlmis-backup-*"
+  command: "pg_restore -Fc --file /home/ubuntu/backups/openlmis-backup-*"
 
 - name: Change passwords
-  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/change_passwords.sql"
+  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
 
 - name: Cleaning up
-  command: "rm -rf /home/ubuntu/*.sql /home/ubuntu/openlmis-backup-*"
+  command: "rm -rf /home/ubuntu/backups/ /home/ubuntu/sql/"
   become: yes
 
 - name: Start app
