@@ -28,8 +28,12 @@
   copy: "src=sql dest=/home/ubuntu/"
   become: yes
 
+- name: Look for backup file
+  command: "ls /backups/ | awk '{ print $1 }'"
+  register: command_backup_file
+
 - name: Load anonymized prod data
-  command: "pg_restore -Fc `ls /backups/ | awk '{ print $1 }'`"
+  command: "pg_restore -Fc /backups/{{ command_backup_file.stdout }}"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
