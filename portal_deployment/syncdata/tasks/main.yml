@@ -33,7 +33,7 @@
   register: command_backup_file
 
 - set_fact:
-    backup_file: {{ command_backup_file.stdout }}
+    backup_file: "{{ command_backup_file.stdout }}"
 
 - name: Copying restore data script
   template:
