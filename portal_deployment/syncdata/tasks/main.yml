@@ -21,12 +21,10 @@
   become: yes
 
 - name: Copy database backup
-  copy: "src=backups dest=/home/ubuntu/"
-  become: yes
+  copy: "src=backups dest=/home/ubuntu/ owner=ubuntu"
 
 - name: Copy sql scripts
-  copy: "src=sql dest=/home/ubuntu/"
-  become: yes
+  copy: "src=sql dest=/home/ubuntu/ owner=ubuntu"
 
 - name: Look for backup file
   command: "ls /home/ubuntu/backups"
@@ -39,7 +37,8 @@
   template:
     src: "restore_data.sh"
     dest: "/home/ubuntu/backups/restore_data.sh"
-  become: yes
+    mode: "a+x"
+    owner: "ubuntu"
 
 - name: Load anonymized prod data
   script: "/home/ubuntu/backups/restore_data.sh"
