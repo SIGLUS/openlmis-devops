@@ -29,11 +29,11 @@
   become: yes
 
 - name: Look for backup file
-  command: "cd /backups && awk '{ print $1 }'"
+  command: "cd /home/ubuntu/backups && awk '{ print $1 }'"
   register: command_backup_file
 
 - name: Load anonymized prod data
-  command: "pg_restore -Fc /backups/{{ command_backup_file.stdout }}"
+  command: "pg_restore -Fc /home/ubuntu/backups/{{ command_backup_file.stdout }}"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
