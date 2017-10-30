@@ -32,8 +32,10 @@
   command: "ls /home/ubuntu/backups"
   register: command_backup_file
 
+- debug: "pg_restore -Fc -vvv /home/ubuntu/backups/{{ command_backup_file.stdout }}"
+
 - name: Load anonymized prod data
-  command: "pg_restore -Fc /home/ubuntu/backups/{{ command_backup_file.stdout }} -vvv"
+  command: "pg_restore -Fc -vvv /home/ubuntu/backups/{{ command_backup_file.stdout }}"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
