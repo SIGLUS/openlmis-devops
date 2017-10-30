@@ -36,7 +36,7 @@
 - name: Copying restore data script
   template:
     src: "restore_data.sh"
-    dest: "/home/ubuntu/backups/restore_data.sh"
+    dest: "/home/ubuntu/backups/"
     mode: "a+x"
     owner: "ubuntu"
 
