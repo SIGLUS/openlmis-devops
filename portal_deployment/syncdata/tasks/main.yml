@@ -33,7 +33,7 @@
   register: command_backup_file
 
 - name: Load anonymized prod data
-  command: "pg_restore -Fc /home/ubuntu/backups/{{ command_backup_file.stdout }}"
+  command: "pg_restore -Fc /home/ubuntu/backups/{{ command_backup_file.stdout }} -vvv"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
