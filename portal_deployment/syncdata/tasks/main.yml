@@ -32,10 +32,17 @@
   command: "ls /home/ubuntu/backups"
   register: command_backup_file
 
-- debug: msg="pg_restore -Fc -vvv /home/ubuntu/backups/{{ command_backup_file.stdout }}"
+- set_fact:
+    backup_file: {{ command_backup_file.stdout }}
+
+- name: Copying restore data script
+  template:
+    src: "restore_data.sh"
+    dest: "/home/ubuntu/backups/restore_data.sh"
+  become: yes
 
 - name: Load anonymized prod data
-  command: "pg_restore -Fc -vvv /home/ubuntu/backups/{{ command_backup_file.stdout }}"
+  script: "/home/ubuntu/backups/restore_data.sh"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
