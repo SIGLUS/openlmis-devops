@@ -41,7 +41,9 @@
     owner: "ubuntu"
 
 - name: Load anonymized prod data
-  script: "/home/ubuntu/backups/restore_data.sh"
+  script: "restore_data.sh"
+  args:
+    chdir: /home/ubuntu/backups
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
