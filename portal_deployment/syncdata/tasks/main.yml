@@ -29,7 +29,7 @@
   become: yes
 
 - name: Look for backup file
-  command: "cd /home/ubuntu/backups && awk '{ print $1 }'"
+  command: "ls /home/ubuntu/backups"
   register: command_backup_file
 
 - name: Load anonymized prod data
