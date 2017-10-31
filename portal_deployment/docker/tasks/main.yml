@@ -9,6 +9,13 @@
     src: docker-compose.yml
     dest: /home/ubuntu/siglus
 
+- name: copy credentials variables
+  template:
+    src: "credentials.env"
+    dest: "/home/ubuntu/siglus/"
+    owner: ubuntu
+    group: ubuntu
+
 - name: cleaning up siglus services
   command: docker-compose down
   args:
@@ -19,6 +26,8 @@
   command: docker-compose up -d --remove-orphans
   args:
     chdir: /home/ubuntu/siglus
-  environment:
-    DBUSER: '{{ dbuser }}'
-    DBPASSWORD: '{{ dbpassword }}'
+
+- name: cleaning up siglus services
+  command: rm credentials.env
+  args:
+    chdir: /home/ubuntu/siglus

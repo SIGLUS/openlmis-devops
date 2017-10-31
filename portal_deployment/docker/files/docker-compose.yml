@@ -3,20 +3,17 @@ services:
   postgres:
     image: "postgres:9.4"
     container_name: open-lmis-db
-    environment:
-      - POSTGRES_USER=$DBUSER
-      - POSTGRES_PASSWORD=$DBPASSWORD
-      - POSTGRES_DB=open_lmis
+    env_file:
+      - ./credentials.env
 
   open-lmis:
     image: siglus/open-lmis-portal
     container_name: open-lmis-portal
     command: sh -c '/scripts/run/wait-for-postgres.sh open-lmis-db sh /scripts/run/start.sh'
+    env_file:
+      - ./credentials.env
     environment:
-      - POSTGRES_USER=$DBUSER
-      - POSTGRES_PASSWORD=$DBPASSWORD
       - POSTGRES_HOST=open-lmis-db
-      - POSTGRES_DB=open_lmis
       - APP_URL=http://localhost:8080
     ports:
       - 8080:8080
