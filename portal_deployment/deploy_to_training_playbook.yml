@@ -1,0 +1,4 @@
+---
+- hosts: training
+  roles:
+    - docker

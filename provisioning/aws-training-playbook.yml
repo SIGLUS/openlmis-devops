@@ -1,0 +1,6 @@
+---
+- hosts: training
+  become: true
+  roles:
+    - docker
+    - docker-compose

@@ -1,0 +1,21 @@
+---
+- name: create gocd directory
+  file:
+    path: /home/ubuntu/siglus
+    state: directory
+
+- name: copy docker-compose folder
+  copy:
+    src: docker-compose.yml
+    dest: /home/ubuntu/siglus
+
+- name: cleaning up siglus services
+  command: docker-compose down
+  args:
+    chdir: /home/ubuntu/siglus
+  ignore_errors: yes
+
+- name: initialize siglus services
+  command: docker-compose up -d --remove-orphans
+  args:
+    chdir: /home/ubuntu/siglus

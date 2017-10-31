@@ -15,3 +15,6 @@ master ansible_host=52.68.243.196 ansible_user=ubuntu ansible_ssh_private_key_fi
 
 [qa-slave]
 slave ansible_host=13.115.166.48 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/openlmis.pem
+
+[training]
+training-host ansible_host=52.196.46.127 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/openlmis.pem
