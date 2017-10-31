@@ -19,3 +19,6 @@
   command: docker-compose up -d --remove-orphans
   args:
     chdir: /home/ubuntu/siglus
+  environment:
+    DBUSER: '{{ dbuser }}'
+    DBPASSWORD: '{{ dbpassword }}'
