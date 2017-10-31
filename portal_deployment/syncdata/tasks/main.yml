@@ -52,8 +52,11 @@
     mode: "a+x"
     owner: "ubuntu"
 
-- name: Load anonymized prod data
+- name: Uncompress prod data backup
   shell: "sh /home/ubuntu/backups/restore_data.sh"
+
+- name: Restoring database
+  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/{{backup_file}}"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
