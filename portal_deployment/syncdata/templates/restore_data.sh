@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pg_restore -Fc /home/ubuntu/backups/{{ backup_file }}
+pg_restore -f /home/ubuntu/{{ backup_file }}.log -Fc /home/ubuntu/backups/{{ backup_file }}
