@@ -22,6 +22,11 @@
     chdir: /home/ubuntu/siglus
   ignore_errors: yes
 
+- name: upgrading open-lmis service
+  command: docker-compose pull open-lmis
+  args:
+    chdir: /home/ubuntu/siglus
+
 - name: initialize siglus services
   command: docker-compose up -d --remove-orphans
   args:
