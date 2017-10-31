@@ -20,6 +20,18 @@
   command: "createdb {{dbname}} -U {{dbuser}}"
   become: yes
 
+- name: Delete schema public
+  command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS public CASCADE' -d {{dbname}}"
+
+- name: Create schema public
+  command: "psql -U postgres -c 'CREATE SCHEMA public AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
+
+- name: Delete schema atomfeed
+  command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS atomfeed CASCADE' -d {{dbname}}"
+
+- name: Create schema atomfeed
+  command: "psql -U postgres -c 'CREATE SCHEMA atomfeed AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
+
 - name: Copy database backup
   copy: "src=backups dest=/home/ubuntu/ owner=ubuntu"
 
