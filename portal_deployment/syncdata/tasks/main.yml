@@ -56,7 +56,7 @@
   shell: "sh /home/ubuntu/backups/restore_data.sh"
 
 - name: Restoring database
-  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/{{backup_file}}"
+  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/{{backup_file}}.log"
 
 - name: Change passwords
   command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
