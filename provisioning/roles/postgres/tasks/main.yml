@@ -2,7 +2,7 @@
 - include: add-apt-repo-for-postgres.yml
 
 - name: Install postgresql
-  apt: pkg='{{item}}' state=present
+  apt: pkg='{{item}}' state=present force=yes
   with_items:
     - libpq-dev
     - postgresql-client
@@ -21,12 +21,20 @@
 
 
 - name: Setup the env variables
-  template: src='{{item}}' dest={{postgres_home}}{{item}} owner=postgres group=postgres
+  template: src='master/{{item}}' dest={{postgres_home}}{{item}} owner=postgres group=postgres
+  when: region == 'uat-master'
   with_items:
      - pg_hba.conf
-     - postgresql.conf.master
-     - postgresql.conf.slave
-     - recovery.conf.slave
+     - postgresql.conf
+
+- name: Setup the env variables
+  template: src='slave/{{item}}' dest={{postgres_home}}{{item}} owner=postgres group=postgres
+  when: region == 'uat-slave'
+  with_items:
+     - pg_hba.conf
+     - postgresql.conf
+     - recovery.conf
 
 - name: Start postgresql
   shell: /etc/init.d/postgresql start
+  ignore_errors: yes
