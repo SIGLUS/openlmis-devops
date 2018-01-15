@@ -2,4 +2,3 @@
 - hosts: uat-master
   roles:
     - syncdata
-    - flyway

@@ -4,6 +4,7 @@
 
 - name: Stop all postgres process
   command: "pkill postgres"
+  ignore_errors: yes
 
 - name: Start postgres server
   command: "service postgresql start"
@@ -11,58 +12,34 @@
 
 - name: Termine sessions
   command: psql -U postgres -c "select pg_terminate_backend(pid) from pg_stat_activity where datname='{{dbname}}'"
+  ignore_errors: yes
+
+- name: Copy database backup
+  copy: "src=backups/database_backup.sql dest=~/database_backup.sql"
+
+- name: Copy sql scripts
+  copy: "src=sql/ dest=~/change_passwords.sql"
 
 - name: Drop current DB
   command: "dropdb {{dbname}} -U {{dbuser}}"
-  become: yes
-
-- name: Create DB
-  command: "createdb {{dbname}} -U {{dbuser}}"
-  become: yes
+  ignore_errors: yes
 
 - name: Delete schema public
   command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS public CASCADE' -d {{dbname}}"
-
-- name: Create schema public
-  command: "psql -U postgres -c 'CREATE SCHEMA public AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
+  ignore_errors: yes
 
 - name: Delete schema atomfeed
   command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS atomfeed CASCADE' -d {{dbname}}"
-
-- name: Create schema atomfeed
-  command: "psql -U postgres -c 'CREATE SCHEMA atomfeed AUTHORIZATION  {{dbuser}}' -d {{dbname}}"
-
-- name: Copy database backup
-  copy: "src=backups dest=/home/ubuntu/ owner=ubuntu"
-
-- name: Copy sql scripts
-  copy: "src=sql dest=/home/ubuntu/ owner=ubuntu"
-
-- name: Look for backup file
-  command: "ls /home/ubuntu/backups"
-  register: command_backup_file
-
-- set_fact:
-    backup_file: "{{ command_backup_file.stdout }}"
-
-- name: Copying restore data script
-  template:
-    src: "restore_data.sh"
-    dest: "/home/ubuntu/backups/"
-    mode: "a+x"
-    owner: "ubuntu"
-
-- name: Uncompress prod data backup
-  shell: "sh /home/ubuntu/backups/restore_data.sh"
+  ignore_errors: yes
 
 - name: Restoring database
-  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/{{backup_file}}.log"
+  command: "psql -U postgres -f ~/database_backup.sql"
 
 - name: Change passwords
-  command: "psql {{dbname}} -U {{dbuser}} --file /home/ubuntu/sql/change_passwords.sql"
+  command: "psql {{ dbname }} -U {{ dbuser }} --file /home/ubuntu/sql/change_passwords.sql"
 
 - name: Cleaning up
-  command: "rm -rf /home/ubuntu/backups/ /home/ubuntu/sql/"
+  command: "rm -rf ~/database_backup.sql ~/change_passwords.sql"
   become: yes
 
 - name: Start app
