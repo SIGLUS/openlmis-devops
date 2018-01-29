@@ -15,7 +15,10 @@
   ignore_errors: yes
 
 - name: Copy database backup
-  copy: "src=backups/database_backup.sql dest=~/database_backup.sql"
+  copy: "src=backups/ dest=~/database_backup.sql.gz"
+
+- name: Extract database backup
+  copy: "tar xvfz ~/database_backup.sql.gz && mv ~/openlmis-backup-*.sql ~/database_backup.sql"
 
 - name: Copy sql scripts
   copy: "src=sql/ dest=~/change_passwords.sql"
