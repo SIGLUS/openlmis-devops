@@ -19,6 +19,8 @@
 
 - name: Extract database backup
   command: "ls -lah"
+  register: cat
+- debug: cat.stdout_lines
 
 #- name: Extract database backup
   #command: "tar xvfz ~/database_backup.sql.gz && mv ~/openlmis-backup-*.sql ~/database_backup.sql"
