@@ -1,4 +1,4 @@
 ---
-- hosts: uat-master
+- hosts: uat-lxc
   roles:
     - syncdata
