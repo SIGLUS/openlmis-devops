@@ -15,12 +15,12 @@
   ignore_errors: yes
 
 - name: Copy database backup
-  copy: "src=backups/ dest=~/database_backup.sql.gz"
+  copy: "src=backups/ dest=/root/database_backup.sql.gz"
 
 - name: Extract database backup
   unarchive:
     src: database_backup.sql.gz
-    dest: database_backup.sql
+    dest: /root/
     remote_src: yes
 
 #- name: Extract database backup
