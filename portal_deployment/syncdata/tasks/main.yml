@@ -18,9 +18,10 @@
   copy: "src=backups/ dest=~/database_backup.sql.gz"
 
 - name: Extract database backup
-  command: "ls -lah"
-  register: cat
-- debug: cat.stdout_lines
+  unarchive:
+    src: database_backup.sql.gz
+    dest: database_backup.sql
+    remote_src: yes
 
 #- name: Extract database backup
   #command: "tar xvfz ~/database_backup.sql.gz && mv ~/openlmis-backup-*.sql ~/database_backup.sql"
