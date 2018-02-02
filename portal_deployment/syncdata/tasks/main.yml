@@ -18,7 +18,7 @@
   copy: "src=backups/ dest=/root/backups"
 
 - name: Extract database backup
-  command: "mv /root/backups/*.sql.qz /root/backups/database_backup.sql.gz && tar xvfz /root/backups/database_backup.sql.gz && mv /root/backups/openlmis-backup-*.sql /root/backups/database_backup.sql"
+  command: "mv /root/backups/*.sql.qz /root/backups/database_backup.sql.gz && tar xvfz /root/backups/database_backup.sql.gz && mv /root/openlmis-backup-*.sql /root/database_backup.sql"
 
 #- name: Copy sql scripts
   #copy: "src=sql/ dest=~/change_passwords.sql"
