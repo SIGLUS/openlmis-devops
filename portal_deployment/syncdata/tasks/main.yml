@@ -21,7 +21,7 @@
   command: sh -c "find -type f -name *.gz | xargs tar xvfz"
 
 - name: Copy sql scripts
-  copy: "src=sql/ dest=~/change_passwords.sql"
+  copy: "src=sql/ dest=~/"
 
 - name: Drop current DB
   command: "dropdb {{dbname}} -U {{dbuser}}"
@@ -36,10 +36,10 @@
   ignore_errors: yes
 
 - name: Restoring database
-  command: sh -c "ls openmis-backup-* | xargs psql -U postgres -f"
+  command: sh -c "find -type f -name 'openlmis-backup-*.sql' | xargs psql -U postgres -f"
 
 - name: Change passwords
-  command: "psql {{ dbname }} -U {{ dbuser }} --file ~/sql/change_passwords.sql"
+  command: sh -c "find -type f -name 'change_passwords.sql' | xargs psql {{ dbname }} -U {{ dbuser }} -f"
 
 - name: Cleaning up
   command: "rm -rf ~/backup ~/sql ~/*.sql"
