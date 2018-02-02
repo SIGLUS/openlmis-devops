@@ -15,16 +15,10 @@
   ignore_errors: yes
 
 - name: Copy database backup
-  copy: "src=backups/ dest=/root/database_backup.sql.gz"
+  copy: "src=backups/ dest=/root/backups"
 
 - name: Extract database backup
-  unarchive:
-    src: database_backup.sql.gz
-    dest: /root/
-    remote_src: yes
-
-#- name: Extract database backup
-  #command: "tar xvfz ~/database_backup.sql.gz && mv ~/openlmis-backup-*.sql ~/database_backup.sql"
+  command: "mv /root/backups/*.sql.qz /root/backups/database_backup.sql.gz && tar xvfz /root/backups/database_backup.sql.gz && mv /root/backups/openlmis-backup-*.sql /root/backups/database_backup.sql"
 
 #- name: Copy sql scripts
   #copy: "src=sql/ dest=~/change_passwords.sql"
