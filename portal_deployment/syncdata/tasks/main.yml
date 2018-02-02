@@ -15,39 +15,36 @@
   ignore_errors: yes
 
 - name: Copy database backup
-  copy: "src=backups/ dest=/root/backups"
+  copy: "src=backups/ dest=~/backups"
 
 - name: Extract database backup
   command: sh -c "find -type f -name *.gz | xargs tar xvfz"
 
-- name: Rename database backup file
-  command: mv openlmis-backup-* database_backup.sql
+- name: Copy sql scripts
+  copy: "src=sql/ dest=~/change_passwords.sql"
 
-#- name: Copy sql scripts
-  #copy: "src=sql/ dest=~/change_passwords.sql"
+- name: Drop current DB
+  command: "dropdb {{dbname}} -U {{dbuser}}"
+  ignore_errors: yes
 
-#- name: Drop current DB
-  #command: "dropdb {{dbname}} -U {{dbuser}}"
-  #ignore_errors: yes
+- name: Delete schema public
+  command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS public CASCADE' -d {{dbname}}"
+  ignore_errors: yes
 
-#- name: Delete schema public
-  #command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS public CASCADE' -d {{dbname}}"
-  #ignore_errors: yes
+- name: Delete schema atomfeed
+  command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS atomfeed CASCADE' -d {{dbname}}"
+  ignore_errors: yes
 
-#- name: Delete schema atomfeed
-  #command: "psql -U postgres -c 'drop SCHEMA  IF EXISTS atomfeed CASCADE' -d {{dbname}}"
-  #ignore_errors: yes
+- name: Restoring database
+  command: sh -c "ls openmis-backup-* | xargs psql -U postgres -f"
 
-#- name: Restoring database
-  #command: "psql -U postgres -f ~/database_backup.sql"
+- name: Change passwords
+  command: "psql {{ dbname }} -U {{ dbuser }} --file ~/sql/change_passwords.sql"
 
-#- name: Change passwords
-  #command: "psql {{ dbname }} -U {{ dbuser }} --file /home/ubuntu/sql/change_passwords.sql"
+- name: Cleaning up
+  command: "rm -rf ~/backup ~/sql ~/*.sql"
+  become: yes
 
-#- name: Cleaning up
-  #command: "rm -rf ~/database_backup.sql ~/change_passwords.sql"
-  #become: yes
-
-#- name: Start app
-  #command: "sudo service tomcat start"
-  #become: yes
+- name: Start app
+  command: "sudo service tomcat start"
+  become: yes
