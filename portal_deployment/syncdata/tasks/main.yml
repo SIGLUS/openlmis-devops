@@ -18,7 +18,7 @@
   copy: "src=backups/ dest=/root/backups"
 
 - name: Extract database backup
-  command: "tar xvfz `find -type f -name *.gz`"
+  command: "find -type f -name *.gz | xargs tar xvfz"
 
 #- name: Copy sql scripts
   #copy: "src=sql/ dest=~/change_passwords.sql"
