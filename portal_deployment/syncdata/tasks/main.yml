@@ -20,6 +20,9 @@
 - name: Extract database backup
   command: sh -c "find -type f -name *.gz | xargs tar xvfz"
 
+- name: Rename database backup file
+  command: mv openlmis-backup-* database_backup.sql
+
 #- name: Copy sql scripts
   #copy: "src=sql/ dest=~/change_passwords.sql"
 
