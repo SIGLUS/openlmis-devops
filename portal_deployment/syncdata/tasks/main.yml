@@ -39,7 +39,7 @@
   command: sh -c "find -type f -name 'openlmis-backup-*.sql' | xargs psql -U postgres -f"
 
 - name: Change passwords
-  command: sh -c "find -type f -name 'change_passwords.sql' | xargs psql {{ dbname }} -U {{ dbuser }} -f"
+  command: sh -c "find -type f -name 'change_passwords.sql' | xargs psql postgres -U {{ dbuser }} -f"
 
 - name: Cleaning up
   command: "rm -rf ~/backup ~/sql ~/*.sql"
