@@ -7,7 +7,7 @@ uat-master ansible_host=52.193.34.16 ansible_user=ubuntu role=uat-master artifac
 uat-slave ansible_host=52.69.115.46 ansible_user=ubuntu role=uat-slave artifact=openlmis-web-slave.war cubes_artifact=cubes.zip dbhost_master=52.193.34.16
 
 [uat-lxc]
-uat-lxc-master ansible_host=54.250.30.82 ansible_port=9022 ansible_user=root role=uat-lxc-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost
+uat-lxc-master ansible_host=54.250.30.82 ansible_port=9022 ansible_user=root role=uat-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost
 
 [prod]
 prod-master ansible_host=172.31.13.52 ansible_user=ubuntu role=prod-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=172.31.4.20
