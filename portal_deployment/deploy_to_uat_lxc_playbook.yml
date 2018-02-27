@@ -1,0 +1,7 @@
+---
+- hosts: uat-lxc
+  roles:
+    - configuration
+    - flyway
+    - package
+    - cubes
