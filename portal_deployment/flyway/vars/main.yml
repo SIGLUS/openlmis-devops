@@ -3,4 +3,3 @@
   application_name: openlmis
   flyway_install_dir: /opt/flyway-commandline
   dbport: 5432
-  dbname: open_lmis
