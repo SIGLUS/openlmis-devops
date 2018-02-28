@@ -2,6 +2,6 @@
 - hosts: lxc
   roles:
     - configuration
-    - flyway
+    - flyway-lxc
     - package
     - cubes
