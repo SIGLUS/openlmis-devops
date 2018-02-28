@@ -15,4 +15,4 @@ prod-master ansible_host=172.31.13.52 ansible_user=ubuntu role=prod-master artif
 prod-slave  ansible_host=172.31.12.55 ansible_user=ubuntu role=prod-slave artifact=openlmis-web-slave.war cubes_artifact=cubes.zip dbhost_master=172.31.1.119 dbname=open_lmis
 
 [training]
-training-host ansible_host=54.64.44.178 ansible_user=ubuntu dbname=open_lmis
+training-host ansible_host=54.64.44.178 ansible_user=ubuntu
