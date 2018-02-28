@@ -1,5 +1,5 @@
 ---
-- hosts: uat-lxc-master
+- hosts: lxc
   roles:
     - configuration
     - flyway
