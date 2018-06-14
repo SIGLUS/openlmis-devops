@@ -5,6 +5,7 @@ pushd portal_deployment/scripts/
   python file_decoder.py $SSH_KEY decoded_openlmis.pem
   echo "Deploying artifacts..."
   docker run --rm --volumes-from $HOSTNAME \
+             -e ANSIBLE_HOST_KEY_CHECKING=False \
              -e HOSTS_VERIFICATION=$HOSTS_VERIFICATION -e DBUSER=$DBUSER \
              -e DBPASSWORD=$DBPASSWORD \
              -e MAILPASSWORD=$MAILPASSWORD \
