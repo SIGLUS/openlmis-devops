@@ -3,7 +3,6 @@
   copy:
     src: backup_pg.sh
     dest: /tmp/backup_pg.sh
-    mode: 0755
-    group: middleware
+    mode: 755
 - name: backup pg
   shell: sh /tmp/backup_pg.sh
