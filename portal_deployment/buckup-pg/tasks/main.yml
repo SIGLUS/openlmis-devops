@@ -1,0 +1,9 @@
+---
+- name: Copy backup sh
+  copy:
+    src: backup_pg.sh
+    dest: /tmp/backup_pg.sh
+    mode: 0755
+    group: middleware
+- name: backup pg
+  shell: sh /tmp/backup_pg.sh
