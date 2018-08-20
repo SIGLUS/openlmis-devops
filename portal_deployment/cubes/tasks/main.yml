@@ -1,13 +1,13 @@
 ---
 - name: Copy artifact
-  copy: "src=openlmis_portal//{{ cubes_artifact }} dest=/app/test"
+  copy: "src=openlmis_portal//{{ cubes_artifact }} dest={{ cubes_home }}/"
   become: yes
 
 - name: Stop cubes service
   service: name=cubes state=stopped
 
 - name: Unzip artifact
-  unarchive: "src=/app/test/{{ cubes_artifact }} dest=/app/test/"
+  unarchive: "src={{ cubes_home }}/{{ cubes_artifact }} dest={{ cubes_home }}/ copy=no group=middleware owner=middleware"
   become: yes
 
 - name: Restart cubes service
