@@ -7,10 +7,8 @@
   service: name=cubes state=stopped
 
 - name: Unzip artifact
-  unarchive:
-    src: "{{ cubes_home }}/{{ cubes_artifact }}"
-    dest: "{{ cubes_home }}"
-    become: yes
+  unarchive: "src={{ cubes_home }}/{{ cubes_artifact }} dest={{ cubes_home }}/"
+  become: yes
 
 - name: Restart cubes service
   service: name=cubes state=restarted
