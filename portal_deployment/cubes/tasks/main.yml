@@ -5,6 +5,7 @@
 
 - name: Stop cubes service
   service: name=cubes state=stopped
+  become: yes
 
 - name: Unzip artifact
   unarchive: "src={{ cubes_home }}/{{ cubes_artifact }} dest={{ cubes_home }}/ copy=no group=middleware owner=middleware"
@@ -12,3 +13,4 @@
 
 - name: Restart cubes service
   service: name=cubes state=restarted
+  become: yes
