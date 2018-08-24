@@ -1,9 +1,9 @@
 [qa]
-qa-master ansible_host=52.197.55.218 ansible_user=ubuntu role=qa-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
+qa-master ansible_host=52.198.153.150 ansible_user=ubuntu role=qa-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
 
 [uat]
-uat-master ansible_host=52.193.34.16 ansible_user=ubuntu role=uat-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
-uat-slave ansible_host=52.69.115.46 ansible_user=ubuntu role=uat-slave artifact=openlmis-web-slave.war cubes_artifact=cubes.zip dbhost_master=52.193.34.16 dbname=open_lmis
+uat-master ansible_host=54.65.64.11 ansible_user=ubuntu role=uat-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
+uat-slave ansible_host=52.69.115.46 ansible_user=ubuntu role=uat-slave artifact=openlmis-web-slave.war cubes_artifact=cubes.zip dbhost_master=54.65.64.11 dbname=open_lmis
 #uat-lxc ansible_host=54.250.30.82 ansible_port=8022 ansible_user=root role=uat-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
 
 [lxc]
