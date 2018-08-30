@@ -1,0 +1,7 @@
+---
+- hosts: showcase
+  roles:
+    - configuration
+    - flyway
+    - package
+    - cubes

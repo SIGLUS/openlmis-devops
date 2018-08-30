@@ -18,3 +18,6 @@ prod-pg-master  ansible_host=54.251.142.73 ansible_user=ubuntu role=prod-pg
 
 [training]
 training-host ansible_host=13.230.252.194 ansible_user=ubuntu
+
+[showcase]
+showcase ansible_host=52.76.22.134 ansible_user=ubuntu artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
