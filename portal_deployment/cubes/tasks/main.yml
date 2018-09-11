@@ -1,6 +1,6 @@
 ---
 - name: Copy artifact
-  copy: "src=openlmis_portal//{{ cubes_artifact }} dest={{ cubes_home }}/"
+  copy: "src={{portal_source}}//{{ cubes_artifact }} dest={{ cubes_home }}/"
   become: yes
 
 - name: Stop cubes service
