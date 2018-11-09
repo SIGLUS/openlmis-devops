@@ -3,8 +3,6 @@ qa-master ansible_host=52.198.153.150 ansible_user=ubuntu role=qa-master artifac
 
 [uat]
 uat-master ansible_host=54.65.64.11 ansible_user=ubuntu role=uat-master artifact=openlmis-web.war portal_source=openlmis_portal_dev cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
-uat-slave ansible_host=52.69.115.46 ansible_user=ubuntu role=uat-slave artifact=openlmis-web-slave.war portal_source=openlmis_portal_dev cubes_artifact=cubes.zip dbhost_master=54.65.64.11 dbname=open_lmis
-#uat-lxc ansible_host=54.250.30.82 ansible_port=8022 ansible_user=root role=uat-master artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=open_lmis
 
 [lxc]
 uat-lxc-master ansible_host=54.250.30.82 ansible_port=9022 ansible_user=root role=uat-lxc-master portal_source=openlmis_portal artifact=openlmis-web.war cubes_artifact=cubes.zip dbhost_master=localhost dbname=postgres
