@@ -3,12 +3,8 @@
   copy: 'src=libs//{{ artifact }} dest={{ application_dir }}/{{ application_name }}/artifact/'
   become: yes
 
-# - name: Stop tomcat service
-#   service: name=tomcat state=stopped
-#   become: yes
-
 - name: Stop tomcat service
-  systemd: name=tomcat state=stopped daemon_reload=yes
+  command: 'service tomcat stop'
   become: yes
 
 - name: Move previous deployment artifact to artifact_last directory
