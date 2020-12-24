@@ -1,16 +1,16 @@
 ---
 - name: Copy artifact
-  copy: "src={{portal_source}}//{{ cubes_artifact }} dest={{ cubes_home }}/"
+  copy: 'src={{portal_source}}//{{ cubes_artifact }} dest={{ cubes_home }}/'
   become: yes
 
 - name: Stop cubes service
-  service: name=cubes state=stopped
+  command: 'service cubes stop'
   become: yes
 
 - name: Unzip artifact
-  unarchive: "src={{ cubes_home }}/{{ cubes_artifact }} dest={{ cubes_home }}/ copy=no group=middleware owner=middleware"
+  unarchive: 'src={{ cubes_home }}/{{ cubes_artifact }} dest={{ cubes_home }}/ copy=no group=middleware owner=middleware'
   become: yes
 
 - name: Restart cubes service
-  service: name=cubes state=restarted
+  command: 'service cubes restart'
   become: yes
