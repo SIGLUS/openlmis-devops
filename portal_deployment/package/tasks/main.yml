@@ -1,28 +1,32 @@
 ---
 - name: Copy artifacts
-  copy: "src=libs//{{ artifact }} dest={{ application_dir }}/{{ application_name }}/artifact/"
+  copy: 'src=libs//{{ artifact }} dest={{ application_dir }}/{{ application_name }}/artifact/'
   become: yes
 
+# - name: Stop tomcat service
+#   service: name=tomcat state=stopped
+#   become: yes
+
 - name: Stop tomcat service
-  service: name=tomcat state=stopped
+  systemd: name=tomcat state=stopped daemon_reload=yes
   become: yes
 
 - name: Move previous deployment artifact to artifact_last directory
-  command: "mv {{ application_dir }}/{{ application_name }}/webapps/ROOT.war {{ application_dir }}/{{ application_name }}/artifact_last/"
+  command: 'mv {{ application_dir }}/{{ application_name }}/webapps/ROOT.war {{ application_dir }}/{{ application_name }}/artifact_last/'
   become: yes
   #ignore_errors: yes
 
 - name: Move previous deployment cache
-  command: "rm -rf {{ application_dir }}/{{ application_name }}/webapps/ROOT"
+  command: 'rm -rf {{ application_dir }}/{{ application_name }}/webapps/ROOT'
   become: yes
 
 - name: Copy current deployment artifact
-  command: "cp {{ application_dir }}/{{ application_name }}/artifact/{{ artifact }} {{ application_dir }}/{{ application_name }}/webapps/ROOT.war"
+  command: 'cp {{ application_dir }}/{{ application_name }}/artifact/{{ artifact }} {{ application_dir }}/{{ application_name }}/webapps/ROOT.war'
   become: yes
 
 # TODO: Remove this step after solving app.version management in openlmis
 #- name: Update application version in app properties
-  #command: "echo 'app.version={{ build_no }}' >> {{ application_dir }}/{{ application_name }}/properties/app.properties"
+#command: "echo 'app.version={{ build_no }}' >> {{ application_dir }}/{{ application_name }}/properties/app.properties"
 
 - name: Restart tomcat service
   service: name=tomcat state=restarted
