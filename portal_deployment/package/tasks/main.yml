@@ -25,7 +25,7 @@
 #command: "echo 'app.version={{ build_no }}' >> {{ application_dir }}/{{ application_name }}/properties/app.properties"
 
 - name: Restart tomcat service
-  service: name=tomcat state=restarted
+  command: 'service tomcat restart'
   become: yes
 
 - name: Confirm application runs
